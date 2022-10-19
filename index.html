@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina de sorteios</title>
+
+    <style>
+
+        *{
+            margin: 0;
+            padding: 0;
+            border: none;
+        }
+
+        body{
+            font-size: 2.5vw;
+        }
+
+        #container{
+            height: 100vh;
+            flex-direction: column;
+            display:flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-content: center;
+        }
+
+        #comand{
+            width: 50%;
+            display:flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        input{
+            width: 50%;
+            height: 5vw;
+            margin-bottom: 1%;
+            padding: 1%;
+            box-sizing: border-box;
+            border: 1px solid black;
+        }
+
+
+        .button{
+            width: 48%;
+            padding:3%;
+            background-color: rgb(26, 110, 255);
+            color: white;
+            border: none;
+            box-sizing: border-box;
+            font-size: 2.5vw;
+        }
+
+        p{
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .button:hover{
+            background-color: rgb(17, 76, 177);
+            box-shadow: 1px 1px 10px rgba(17, 76, 177, 0.665);
+        }
+
+        #adicionados{
+            text-align: center;
+            margin-top: 1% ;
+        }
+    </style>
+
+</head>
+<body>
+    <div id="container">
+        <p id="resultado"></p>
+        <input type="text" placeholder="Adicione o elemento">
+        <div id="comand">
+            <button class="button" onclick="adicionarPart()">Adicionar</button>
+            <button class="button" id="sortear" onclick="sortear()">Sortear</button>
+        </div>
+        <div id="adicionados"></div>
+    </div>
+
+    <script>
+
+        var add = document.querySelector("input");
+        var pessoas = []
+        var contador = 0;
+
+        function adicionarPart(){
+
+            pessoas.push(add.value);
+            console.log(pessoas)
+            
+            var adicionados = document.querySelector("#adicionados")
+
+            adicionados.innerHTML +=  add.value + "<br>";
+
+            add.value = "";
+
+        }
+
+        function sortear(){
+            let resultado = document.getElementById("resultado")
+
+            if( pessoas.length < 2){
+                window.alert("ERRO - insira pelo menos dois elementos");
+
+                resultado.innerHTML = " ";
+            }
+
+            else{
+            let np = pessoas.length;
+            let ns = Math.floor(Math.random() * np);
+
+            resultado.innerHTML = pessoas[ns];
+
+            soma()
+
+            function soma(){
+                contador += 1;
+            }
+
+            console.log(`Clique de número: ${contador}, o número sorteado foi ${ns} e a pessoa foi: ${pessoas[ns]} `);
+            }
+        }
+
+    </script>
+</body>
+</html>
